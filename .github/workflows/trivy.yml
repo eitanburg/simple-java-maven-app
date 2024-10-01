@@ -21,7 +21,7 @@
          - name: Run Trivy vulnerability scanner
            uses: aquasecurity/trivy-action@master
            with:
-             image-ref: 'eitanburg/javapp:t1'
+             image-ref: 'eitanburg/javapp:latest'
              format: 'table'
              exit-code: '1'
              ignore-unfixed: true

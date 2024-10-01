@@ -9,6 +9,6 @@ RUN mvn clean package
 # Stage 2: Create the runtime image
 FROM openjdk:21-slim-bookworm
 WORKDIR /app
-COPY --from=build /app/target/java-maven-app.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
