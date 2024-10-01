@@ -1,0 +1,29 @@
+# .github/workflows/trivy.yml
+   name: Trivy Vulnerability Scan
+
+   on:
+     push:
+       branches:
+         - main
+     pull_request:
+       branches:
+         - main
+
+   jobs:
+     trivy:
+       runs-on: ubuntu-latest
+       env:
+         TRIVY_SEVERITY: CRITICAL
+         DOCKER_IMAGE: myapp:${{ github.sha }}
+       steps:
+         - uses: actions/checkout@v3
+
+         - name: Build Docker image
+           run: docker build -t $DOCKER_IMAGE .
+
+         - name: Scan Docker image with Trivy
+           uses: aquasecurity/trivy-action@v0.10.0
+           with:
+             image-ref: $DOCKER_IMAGE
+             severity: ${{ env.TRIVY_SEVERITY }}
+             exit-code: 1
