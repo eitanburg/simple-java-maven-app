@@ -4,11 +4,7 @@
      push:
        branches:
          - master
-       paths:
-         - "**/Dockerfile"
-     pull_request:
-       paths:
-         - "**/Dockerfile"
+      
 
    jobs:
      hadolint:
